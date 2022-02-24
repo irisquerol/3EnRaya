@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">3EnRaya</string>
+    <string name="turno">Turno para:</string>
+    <string name="player1">Jugador 1</string>
+    <string name="player2">Jugador 2</string>
 </resources>
