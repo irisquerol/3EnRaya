@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">3EnRaya</string>
+    <string name="app_name">Tic Tac Toe</string>
     <string name="turn1">Turno para: Jugador1</string>
     <string name="turn2">Turno para: Jugador2</string>
     <string name="win1">El Jugador1 ganó!</string>
     <string name="win2">El Jugador2 ganó!</string>
+    <string name="draw">Han empatado!</string>
     <string name="player1">X</string>
     <string name="player2">O</string>
     <string name="block_toast">La casilla ya está utilizada</string>

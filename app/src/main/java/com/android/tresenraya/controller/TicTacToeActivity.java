@@ -32,7 +32,7 @@ public class TicTacToeActivity extends AppCompatActivity {
             R.id.btn_8,
             R.id.btn_9,
     };
-    private Button restart;
+    private ImageButton restart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class TicTacToeActivity extends AppCompatActivity {
     private void createListButtons() {
         buttons = new ArrayList<>(BUTTON_IDS.length);
 
-        ImageButton restart = (ImageButton)findViewById(R.id.restart_b);
+        restart = findViewById(R.id.restart_b);
         restart.setOnClickListener(view -> restartGame());
         restart.setVisibility(View.GONE);
 
@@ -66,11 +66,6 @@ public class TicTacToeActivity extends AppCompatActivity {
 
 
     private void print(Button btn) {
-      /*  if (btn.getText().equals(R.string.player1)) {
-            showToast(0);
-        } else if (btn.getText().equals(R.string.player2)) {
-            showToast(0);
-        } else {*/
         if (turn == 1) {
             btn.setText(R.string.player1);//X
             btn.setEnabled(false);
@@ -81,6 +76,7 @@ public class TicTacToeActivity extends AppCompatActivity {
             turn = 1;
         }
         changeTextTurn();
+        checkBoard();
         board.updateMatrix(buttons);
         if (board.checkWin("X")) {
             showToast(1);
@@ -92,7 +88,6 @@ public class TicTacToeActivity extends AppCompatActivity {
         if (board.checkWin("O")) {
             showToast(2);
             blockBoard();
-
             restart.setVisibility(View.VISIBLE);
             textTurn.setText(R.string.win2);
         }
@@ -102,6 +97,18 @@ public class TicTacToeActivity extends AppCompatActivity {
     private void blockBoard() {
         for (Button btn : buttons) {
             btn.setEnabled(false);
+        }
+    }
+
+    private void checkBoard() {
+        boolean emptyBox = false;
+        for (Button btn : buttons) {
+            if (btn.isEnabled())
+                emptyBox = true;
+        }
+        if (!emptyBox) {
+            restart.setVisibility(View.VISIBLE);
+            textTurn.setText(R.string.draw);
         }
     }
 
@@ -120,19 +127,14 @@ public class TicTacToeActivity extends AppCompatActivity {
                     R.string.block_toast, Toast.LENGTH_SHORT);
         } else if (type == 1) {
             t = Toast.makeText(TicTacToeActivity.this,
-                    "PLAYER 1 HA GANADO -X-", Toast.LENGTH_SHORT);//PlayerX Win
+                    R.string.win1, Toast.LENGTH_SHORT);//PlayerX Win
         } else {
             t = Toast.makeText(TicTacToeActivity.this,
-                    "PLAYER 2 HA GANADO -O-", Toast.LENGTH_SHORT);//PlayerX Win
+                    R.string.win2, Toast.LENGTH_SHORT);//PlayerX Win
         }
 
         t.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL, 0, 0);
         t.show();
     }
-
-    private void verifyWin(boolean answer, boolean isTrue) {
-
-    }
-
 
 }
