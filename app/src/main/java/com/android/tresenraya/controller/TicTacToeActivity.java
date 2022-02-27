@@ -34,6 +34,10 @@ public class TicTacToeActivity extends AppCompatActivity {
     };
     private ImageButton restart;
 
+    /**
+     * Creamos y llamamos el la funcion para crear botones y el texto
+     * @param savedInstanceState bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +48,18 @@ public class TicTacToeActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This function restarts the application to play agian without
+     * needing to close the app
+     */
     private void restartGame() {
         finish();
         startActivity(getIntent());
     }
 
+    /**
+     * setOnCLickListener to all buttons
+     */
     private void createListButtons() {
         buttons = new ArrayList<>(BUTTON_IDS.length);
 
@@ -65,6 +76,14 @@ public class TicTacToeActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * This function prints in screen an X or O, depending on the
+     * current player turn.
+     *
+     * Everytime a button is pressed we check if a player has won.
+     *
+     * @param btn buttons
+     */
     private void print(Button btn) {
         if (turn == 1) {
             btn.setText(R.string.player1);//X
@@ -94,12 +113,18 @@ public class TicTacToeActivity extends AppCompatActivity {
     }
     //}
 
+    /**
+     * Function to block the board once a player has won
+     */
     private void blockBoard() {
         for (Button btn : buttons) {
             btn.setEnabled(false);
         }
     }
 
+    /**
+     * Function to check the status of the board
+     */
     private void checkBoard() {
         boolean emptyBox = false;
         for (Button btn : buttons) {
@@ -112,6 +137,9 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Change the text to inform the user the current player turn
+     */
     private void changeTextTurn() {
         if (turn == 1) {
             textTurn.setText(R.string.turn1);
@@ -120,6 +148,10 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Function that shows which player has won with a toast
+     * @param type int
+     */
     private void showToast(int type) {
         Toast t;
         if (type == 0) {

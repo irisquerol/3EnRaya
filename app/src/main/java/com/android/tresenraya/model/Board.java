@@ -5,12 +5,17 @@ import android.widget.Button;
 import java.util.List;
 
 public class Board {
-    Button matrix[][];
+    Button[][] matrix;
 
     public Board(List<Button> buttons) {
         updateMatrix(buttons);
     }
 
+    /**
+     * Function that creates a matrix to represent the board, each
+     * space is assigned to a different button
+     * @param buttons list button
+     */
     public void updateMatrix(List<Button> buttons) {
         matrix = new Button[3][3];
         int cont = 0;
@@ -24,6 +29,7 @@ public class Board {
 
 
     /**
+     * Function that checks if a player has won, in all the possible combinations.
      * @return 1 or 2 depending on who won. returns 0 if anyone won
      */
     public boolean checkWin(String player) {
