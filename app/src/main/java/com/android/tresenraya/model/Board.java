@@ -8,18 +8,20 @@ public class Board {
     Button matrix[][];
 
     public Board(List<Button> buttons) {
-        createMatrix(buttons);
+        updateMatrix(buttons);
     }
 
-    private void createMatrix(List<Button> buttons) {
+    public void updateMatrix(List<Button> buttons) {
         matrix = new Button[3][3];
+        int cont = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                matrix[i][j] = buttons.get(i + j);
+                matrix[i][j] = buttons.get(cont++);
             }
         }
 
     }
+
 
     /**
      * @return 1 or 2 depending on who won. returns 0 if anyone won
@@ -31,6 +33,12 @@ public class Board {
                 win = true;
             }
         }
+        for (int i = 0; i < 3; i++) {
+            if (matrix[0][i].getText().equals(player) && matrix[1][i].getText().equals(player) && matrix[2][i].getText().equals(player)) {
+                win = true;
+            }
+        }
+
         if (matrix[0][0].getText().equals(player) && matrix[1][1].getText().equals(player) && matrix[2][2].getText().equals(player)) {
             win = true;
         } else if (matrix[0][2].getText().equals(player) && matrix[1][1].getText().equals(player) && matrix[2][0].getText().equals(player)) {
