@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,17 +32,30 @@ public class TicTacToeActivity extends AppCompatActivity {
             R.id.btn_8,
             R.id.btn_9,
     };
+    private Button restart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         createListButtons();
         textTurn = findViewById(R.id.text_turn);
+
+    }
+
+    private void restartGame() {
+        finish();
+        startActivity(getIntent());
     }
 
     private void createListButtons() {
         buttons = new ArrayList<>(BUTTON_IDS.length);
+
+        ImageButton restart = (ImageButton)findViewById(R.id.restart_b);
+        restart.setOnClickListener(view -> restartGame());
+        restart.setVisibility(View.GONE);
+
         for (int id : BUTTON_IDS) {
             Button button = findViewById(id);
             button.setOnClickListener(view -> print(button)); // maybe
@@ -70,11 +85,15 @@ public class TicTacToeActivity extends AppCompatActivity {
         if (board.checkWin("X")) {
             showToast(1);
             blockBoard();
+
+            restart.setVisibility(View.VISIBLE);
             textTurn.setText(R.string.win1);
         }
         if (board.checkWin("O")) {
             showToast(2);
             blockBoard();
+
+            restart.setVisibility(View.VISIBLE);
             textTurn.setText(R.string.win2);
         }
     }
